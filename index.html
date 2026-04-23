@@ -1,0 +1,1085 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSI Wireless Exam – Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #161a23;
+    --surface2: #1e2330;
+    --accent: #f0a500;
+    --accent2: #3ecfcf;
+    --accent3: #e05c7a;
+    --text: #e8eaf0;
+    --muted: #7a8099;
+    --border: #2a3040;
+    --easy: #3ecfcf;
+    --medium: #f0a500;
+    --hard: #e05c7a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* HEADER */
+  .hero {
+    background: linear-gradient(135deg, #0d0f14 0%, #1a1030 50%, #0d1520 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%; transform: translateX(-50%);
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(240,165,0,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(240,165,0,0.15);
+    color: var(--accent);
+    border: 1px solid rgba(240,165,0,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    font-family: 'Syne', sans-serif;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(26px, 5vw, 44px);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero p {
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto 24px;
+    font-size: 14px;
+  }
+  .exam-pills {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .pill {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .pill strong { color: var(--accent); }
+
+  /* NEGATIVE MARKING ALERT */
+  .alert {
+    background: rgba(224,92,122,0.12);
+    border: 1px solid rgba(224,92,122,0.35);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 20px 24px;
+    font-size: 13px;
+    color: #f4a0b0;
+  }
+  .alert strong { color: var(--accent3); }
+
+  /* NAV TABS */
+  .tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    overflow-x: auto;
+    background: var(--surface);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 14px 16px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-btn:hover:not(.active) { color: var(--text); }
+
+  /* SECTIONS */
+  .section { display: none; padding: 24px; max-width: 860px; margin: 0 auto; }
+  .section.active { display: block; }
+
+  /* SCHEDULE */
+  .week-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .week-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+  }
+  .week-num {
+    background: var(--accent);
+    color: #000;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 12px;
+    border-radius: 6px;
+    padding: 4px 10px;
+    white-space: nowrap;
+  }
+  .week-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; }
+  .week-dates { margin-left: auto; color: var(--muted); font-size: 12px; }
+  .week-body { padding: 16px 20px; }
+  .day-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 1fr;
+    gap: 8px 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    align-items: start;
+  }
+  .day-row:last-child { border-bottom: none; }
+  .day-name { font-weight: 600; color: var(--accent2); }
+  .day-night { color: var(--muted); font-size: 12px; }
+  .day-col-head {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-bottom: 4px;
+    font-weight: 600;
+  }
+
+  /* TOPIC CARDS */
+  .topic-grid { display: flex; flex-direction: column; gap: 16px; }
+  .topic-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .topic-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+  }
+  .topic-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 3px 8px;
+    color: var(--muted);
+  }
+  .topic-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; flex: 1; }
+  .difficulty {
+    font-size: 11px;
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .d-easy { background: rgba(62,207,207,0.15); color: var(--easy); border: 1px solid rgba(62,207,207,0.3); }
+  .d-med { background: rgba(240,165,0,0.15); color: var(--medium); border: 1px solid rgba(240,165,0,0.3); }
+  .d-hard { background: rgba(224,92,122,0.15); color: var(--hard); border: 1px solid rgba(224,92,122,0.3); }
+  .topic-body { padding: 18px; }
+  .topic-body h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 8px;
+    margin-top: 14px;
+  }
+  .topic-body h4:first-child { margin-top: 0; }
+  .topic-body p { font-size: 13.5px; color: #c0c8d8; margin-bottom: 8px; }
+  .analogy {
+    background: rgba(62,207,207,0.07);
+    border-left: 3px solid var(--accent2);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-size: 13px;
+    color: #b0dede;
+    font-style: italic;
+  }
+  .key-terms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .kt {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 3px 9px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .marks-badge {
+    font-size: 11px;
+    color: var(--muted);
+    margin-left: auto;
+  }
+
+  /* PART A section */
+  .parta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media(max-width:580px) { .parta-grid { grid-template-columns: 1fr; } }
+  .parta-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .parta-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: var(--accent2);
+  }
+  .parta-card p { font-size: 13px; color: #b0b8c8; }
+  .marks-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+  .marks-strip strong { color: var(--accent); font-family: 'Syne', sans-serif; font-size: 18px; }
+
+  /* TIPS */
+  .tips-list { display: flex; flex-direction: column; gap: 12px; }
+  .tip {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 13.5px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .tip-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .tip p { color: #c0c8d8; }
+  .tip strong { color: var(--text); }
+
+  /* Section title */
+  .sec-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+  .sec-sub { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
+
+  /* DAILY PLAN */
+  .daily-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .daily-box h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: var(--accent2);
+    font-size: 15px;
+  }
+  .time-row {
+    display: flex;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    align-items: flex-start;
+  }
+  .time-row:last-child { border-bottom: none; }
+  .time-slot {
+    min-width: 100px;
+    color: var(--accent);
+    font-weight: 600;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+  }
+  .time-act { color: #c0c8d8; }
+  .time-act em { color: var(--muted); font-style: normal; font-size: 12px; }
+
+  /* Progress overview */
+  .overview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+  @media(max-width:520px){ .overview-grid { grid-template-columns: 1fr 1fr; } }
+  .ov-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+  }
+  .ov-num { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: var(--accent); }
+  .ov-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">Gujarat PSI Wireless & Technical Operator</div>
+  <h1>Your Complete<br><span>Exam Study Guide</span></h1>
+  <p>6-week plan tailored to your schedule · Topics explained simply · Starting from scratch</p>
+  <div class="exam-pills">
+    <div class="pill">📅 Exam: <strong>7 June 2025</strong></div>
+    <div class="pill">📝 <strong>200 MCQs</strong> · 3 Hours</div>
+    <div class="pill">⚠️ <strong>-0.25</strong> Negative Marking</div>
+    <div class="pill">✅ Qualify <strong>both</strong> parts separately</div>
+  </div>
+</div>
+
+<div class="alert">
+  <strong>⚠️ Critical Rule:</strong> There is -0.25 negative marking for wrong answers. But each question has an "E – Not Attempted" option with <strong>zero penalty</strong>. When in doubt, choose E — never guess blindly.
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="tab-btn" onclick="showTab('schedule')">6-Week Schedule</button>
+  <button class="tab-btn" onclick="showTab('daily')">Daily Routine</button>
+  <button class="tab-btn" onclick="showTab('parta')">Part A Topics</button>
+  <button class="tab-btn" onclick="showTab('partb')">Part B Topics</button>
+  <button class="tab-btn" onclick="showTab('tips')">Exam Tips</button>
+</div>
+
+<!-- OVERVIEW -->
+<div id="overview" class="section active">
+  <div class="sec-title">Exam at a Glance</div>
+  <div class="sec-sub">Understand the structure before you start studying</div>
+
+  <div class="overview-grid">
+    <div class="ov-card"><div class="ov-num">200</div><div class="ov-label">Total MCQs</div></div>
+    <div class="ov-card"><div class="ov-num">3h</div><div class="ov-label">Duration</div></div>
+    <div class="ov-card"><div class="ov-num">40%</div><div class="ov-label">Min. to Qualify Each Part</div></div>
+    <div class="ov-card"><div class="ov-num">80</div><div class="ov-label">Part A (Aptitude) Marks</div></div>
+    <div class="ov-card"><div class="ov-num">120</div><div class="ov-label">Part B (Technical) Marks</div></div>
+    <div class="ov-card"><div class="ov-num">−0.25</div><div class="ov-label">Per Wrong Answer</div></div>
+  </div>
+
+  <div class="daily-box">
+    <h3>How the Exam is Split</h3>
+    <div class="time-row">
+      <div class="time-slot">PART A</div>
+      <div class="time-act"><strong>80 marks, 80 MCQs</strong> — Reasoning, Maths, Constitution of India, Current Affairs & GK. You need at least 32 marks (40%) to clear this part. This is the same for all PSI exams, so lots of practice material exists online.</div>
+    </div>
+    <div class="time-row">
+      <div class="time-slot">PART B</div>
+      <div class="time-act"><strong>120 marks, 120 MCQs</strong> — Electronics, Communication, Computers, Networks, Security. You need at least 48 marks (40%) to clear this. This is your main challenge. Your CS background covers about 30% of it; the rest is EC (Electronics & Communication).</div>
+    </div>
+    <div class="time-row">
+      <div class="time-slot">Strategy</div>
+      <div class="time-act">Don't just aim to qualify — a higher score means better merit ranking. Spend 70% of study time on Part B (EC topics) and 30% on Part A. In Part A, maths and reasoning are faster to improve than GK.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 6-WEEK SCHEDULE -->
+<div id="schedule" class="section">
+  <div class="sec-title">6-Week Study Plan</div>
+  <div class="sec-sub">May 5 → June 6 · Start with what you already know, go deeper each week</div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">WEEK 1</div>
+      <div class="week-title">CS Comfort Zone — Build Confidence Fast</div>
+      <div class="week-dates">May 5–11</div>
+    </div>
+    <div class="week-body">
+      <div class="day-row">
+        <div></div><div class="day-col-head">Night (9–11pm)</div><div class="day-col-head">Weekend</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Mon</div>
+        <div>Computer Networks – OSI, TCP/IP, IP addressing <div class="day-night">30 min learn + 30 min MCQs</div></div>
+        <div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Tue</div>
+        <div>Computer Networks – LAN, routers, switching <div class="day-night">30 min learn + 30 min MCQs</div></div>
+        <div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Wed</div>
+        <div>Network Security – Encryption, symmetric/asymmetric <div class="day-night">30 min learn + 30 min MCQs</div></div>
+        <div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Thu</div>
+        <div>Microprocessors 8085 – Architecture basics <div class="day-night">30 min learn + 30 min MCQs</div></div>
+        <div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Fri</div>
+        <div>Digital Electronics – Number systems, logic gates <div class="day-night">30 min learn + 30 min MCQs</div></div>
+        <div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Sat</div>
+        <div>—</div>
+        <div><strong>4 hrs:</strong> Web Tech + Android + Deep dive CS MCQs. Mock test at end.</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Sun</div>
+        <div>—</div>
+        <div><strong>4 hrs:</strong> Part A — Reasoning + Quantitative Aptitude. Practice sets.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">WEEK 2</div>
+      <div class="week-title">Electronics Fundamentals — Semiconductors & Transistors</div>
+      <div class="week-dates">May 12–18</div>
+    </div>
+    <div class="week-body">
+      <div class="day-row">
+        <div class="day-name">Mon</div>
+        <div>Semiconductors – PN junction, diodes, how they work <div class="day-night">YouTube + MCQs</div></div>
+        <div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Tue</div>
+        <div>Diode Applications – Rectifiers, clipping, clamping</div><div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Wed</div>
+        <div>Transistors – NPN/PNP, biasing circuits</div><div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Thu</div>
+        <div>Transistor Amplifiers – CE, CB, CC configs</div><div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Fri</div>
+        <div>Op-Amps & Linear ICs – Basic operations</div><div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Sat</div>
+        <div>—</div>
+        <div><strong>4 hrs:</strong> Full Electronics ch.1 revision + 50-question mock MCQ set</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Sun</div>
+        <div>—</div>
+        <div><strong>4 hrs:</strong> Part A – Constitution of India basics + more Aptitude practice</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">WEEK 3</div>
+      <div class="week-title">Communication Systems — The Heart of This Exam</div>
+      <div class="week-dates">May 19–25</div>
+    </div>
+    <div class="week-body">
+      <div class="day-row">
+        <div class="day-name">Mon</div>
+        <div>AM/FM Modulation – Basics, bandwidth, use cases</div><div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Tue</div>
+        <div>Antennas & Wave Propagation – Types, gains, frequency</div><div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Wed</div>
+        <div>SSB, Pulse & Digital Modulation (ASK, FSK, PSK)</div><div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Thu</div>
+        <div>Multiplexing – TDM, FDM, source coding</div><div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Fri</div>
+        <div>Telephone Networks – Switching, speech digitization</div><div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Sat</div>
+        <div>—</div>
+        <div><strong>5 hrs:</strong> Communication systems full revision + 60-question MCQ set</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Sun</div>
+        <div>—</div>
+        <div><strong>4 hrs:</strong> Part A – Current Affairs GK + Reasoning + Maths mixed mock</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">WEEK 4</div>
+      <div class="week-title">Microwave · Fibre Optics · TV · Mobile</div>
+      <div class="week-dates">May 26 – Jun 1</div>
+    </div>
+    <div class="week-body">
+      <div class="day-row">
+        <div class="day-name">Mon</div>
+        <div>Microwave Engineering – RADAR, satellite, propagation</div><div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Tue</div>
+        <div>Fibre Optics – How light travels in fibre, types, uses</div><div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Wed</div>
+        <div>Mobile Communication – GSM, CDMA, 4G LTE, cellular concepts</div><div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Thu</div>
+        <div>Television – PAL, color signal, TV modulation systems</div><div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Fri</div>
+        <div>Digital Electronics – Flip flops, counters, VLSI, FPGA</div><div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Sat</div>
+        <div>—</div>
+        <div><strong>5 hrs:</strong> Week 4 topics full revision + 60-Q mock</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Sun</div>
+        <div>—</div>
+        <div><strong>4 hrs:</strong> Network Instruments & Measurements topic + Aptitude practice</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">WEEK 5</div>
+      <div class="week-title">Revision + Weak Topics + Full Mock Tests</div>
+      <div class="week-dates">Jun 2–6</div>
+    </div>
+    <div class="week-body">
+      <div class="day-row">
+        <div class="day-name">Mon</div>
+        <div>Revise your 3 weakest topics from Part B</div><div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Tue</div>
+        <div>Revise Part A – Constitution + GK. Do 40-Q set.</div><div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Wed</div>
+        <div>Full 200-Q timed mock test at 9pm (simulate real exam)</div><div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Thu</div>
+        <div>Analyse mock. Revise wrong answers only.</div><div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Fri</div>
+        <div>Light revision only. No new topics. Sleep well.</div><div>—</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name">Sat</div>
+        <div>—</div>
+        <div><strong>Exam Day: June 7 🎯</strong> Eat well, go early, use E option wisely.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAILY ROUTINE -->
+<div id="daily" class="section">
+  <div class="sec-title">Your Daily Study Routine</div>
+  <div class="sec-sub">Minimal changes to your life, maximum output</div>
+
+  <div class="daily-box">
+    <h3>🌅 Weekday Routine (Mon–Fri)</h3>
+    <div class="time-row">
+      <div class="time-slot">6:30 AM</div>
+      <div class="time-act">Wake up, freshen up as usual</div>
+    </div>
+    <div class="time-row">
+      <div class="time-slot">7:00–8:15 AM</div>
+      <div class="time-act">Garden walk + exercise as usual. <em>→ Play an EC/communication topic audio on YouTube while walking. Passive learning adds up.</em></div>
+    </div>
+    <div class="time-row">
+      <div class="time-slot">8:15–9:00 AM</div>
+      <div class="time-act">Bath + getting ready. <em>→ While getting ready, mentally recall 5 things from last night's study. Small but powerful.</em></div>
+    </div>
+    <div class="time-row">
+      <div class="time-slot">9:00–10:00 AM</div>
+      <div class="time-act">Swimming as usual</div>
+    </div>
+    <div class="time-row">
+      <div class="time-slot">10 AM–8 PM</div>
+      <div class="time-act">Office. <em>→ If you get a lunch break, spend 15 minutes on a Reasoning or Maths MCQ app (Testbook / GPSC app). Don't force it.</em></div>
+    </div>
+    <div class="time-row">
+      <div class="time-slot">8:00–9:00 PM</div>
+      <div class="time-act">Gym as usual. Don't compromise health.</div>
+    </div>
+    <div class="time-row">
+      <div class="time-slot">9:00–9:20 PM</div>
+      <div class="time-act">Eat dinner. Relax. Don't open books immediately.</div>
+    </div>
+    <div class="time-row">
+      <div class="time-slot">9:30–11:00 PM ⭐</div>
+      <div class="time-act"><strong>Main Study Block — 90 minutes.</strong> 30 min: Watch one YouTube explanation of tonight's topic. 30 min: Read short notes or a summary (make your own). 30 min: Solve 15–20 MCQs on that topic.</div>
+    </div>
+    <div class="time-row">
+      <div class="time-slot">11:00 PM</div>
+      <div class="time-act">Stop. Sleep. Consistency beats marathon sessions.</div>
+    </div>
+  </div>
+
+  <div class="daily-box">
+    <h3>🏖️ Weekend Routine (Sat–Sun)</h3>
+    <div class="time-row">
+      <div class="time-slot">6:30–10 AM</div>
+      <div class="time-act">Morning routine as usual (garden, swimming)</div>
+    </div>
+    <div class="time-row">
+      <div class="time-slot">10:30–12:30 PM ⭐</div>
+      <div class="time-act"><strong>Session 1 — 2 hours.</strong> Deep study of the week's hardest topic. Use notes + MCQs.</div>
+    </div>
+    <div class="time-row">
+      <div class="time-slot">12:30–2:30 PM</div>
+      <div class="time-act">Lunch + rest. Mandatory. Don't skip.</div>
+    </div>
+    <div class="time-row">
+      <div class="time-slot">2:30–4:30 PM ⭐</div>
+      <div class="time-act"><strong>Session 2 — 2 hours.</strong> Mixed MCQ practice from 2–3 different topics. Builds recall speed.</div>
+    </div>
+    <div class="time-row">
+      <div class="time-slot">4:30–8 PM</div>
+      <div class="time-act">Free time / gym / family</div>
+    </div>
+    <div class="time-row">
+      <div class="time-slot">9–10:30 PM</div>
+      <div class="time-act">Light revision — just re-read your notes from this week. No new material.</div>
+    </div>
+  </div>
+
+  <div class="daily-box">
+    <h3>📱 Best Free Resources (Phone-friendly)</h3>
+    <div class="time-row">
+      <div class="time-slot">YouTube</div>
+      <div class="time-act">Search "Electronics Wallah EC" or "Neso Academy" for EC topics. Short, clear Hindi/English videos. Perfect for night study.</div>
+    </div>
+    <div class="time-row">
+      <div class="time-slot">Testbook App</div>
+      <div class="time-act">Has PSI Gujarat mock tests + electronics MCQ sets. Use on commute or lunch.</div>
+    </div>
+    <div class="time-row">
+      <div class="time-slot">Unacademy</div>
+      <div class="time-act">Good for Constitution of India and GK topics for Part A.</div>
+    </div>
+    <div class="time-row">
+      <div class="time-slot">ChatGPT / Claude</div>
+      <div class="time-act">Ask "explain [topic] like I'm new to it" or "give me 10 MCQs on [topic]" anytime — instant personalised practice.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PART A -->
+<div id="parta" class="section">
+  <div class="sec-title">Part A — 80 Marks (Need 32 to Pass)</div>
+  <div class="sec-sub">Same syllabus as general PSI exams — lots of material available online</div>
+
+  <div class="parta-grid">
+    <div class="parta-card">
+      <h3>🧠 Reasoning & Data Interpretation — 25 marks</h3>
+      <p>Puzzles, series, arrangements, coding-decoding, blood relations, data tables and graphs. This is pure practice. The more MCQs you solve, the faster you get. Start with Reasoning for quick wins.</p>
+      <br><p><strong>Tip:</strong> Do 20 questions every day in the Testbook app during lunch. Speed is the key here — aim for under 60 seconds per question.</p>
+    </div>
+    <div class="parta-card">
+      <h3>📐 Quantitative Aptitude — 25 marks</h3>
+      <p>Percentages, ratios, time-speed-distance, profit-loss, simple & compound interest, averages. You studied this in engineering entrance exams — it will come back fast with 1 week of practice.</p>
+      <br><p><strong>Tip:</strong> Focus on the formula sheet, not derivations. Memorise shortcuts for percentage and ratio problems.</p>
+    </div>
+    <div class="parta-card">
+      <h3>⚖️ Constitution of India — 15 marks</h3>
+      <p>Fundamental Rights, Directive Principles, Preamble, important Articles (like 14, 19, 21, 32, 370), Parliament structure, President vs PM powers, Supreme Court, emergency provisions.</p>
+      <br><p><strong>Tip:</strong> Don't try to read the full Constitution. Get a "Constitution for competitive exams" PDF — it's a 30-page summary of everything that gets asked.</p>
+    </div>
+    <div class="parta-card">
+      <h3>🌍 Current Affairs & GK — 15 marks</h3>
+      <p>Recent news (last 6 months), important awards, science developments, sports, national/international events, Gujarat-specific news. This is the hardest to prepare because it changes daily.</p>
+      <br><p><strong>Tip:</strong> Follow one daily GK app (like GKToday) for 10 minutes each morning. Focus on last 6 months. Don't go too far back.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PART B -->
+<div id="partb" class="section">
+  <div class="sec-title">Part B — 120 Marks (Need 48 to Pass)</div>
+  <div class="sec-sub">11 topics · Explained simply · Difficulty rated for a CS engineer</div>
+
+  <div class="topic-grid">
+
+    <!-- Topic 1 -->
+    <div class="topic-card">
+      <div class="topic-head">
+        <div class="topic-num">01</div>
+        <div class="topic-name">Electronics Components, Devices & Circuits</div>
+        <div class="difficulty d-hard">Hardest for CS</div>
+        <div class="marks-badge">~20 MCQs</div>
+      </div>
+      <div class="topic-body">
+        <h4>What is this?</h4>
+        <p>This is the foundation of all electronics. Just like in programming everything is 0s and 1s at the core, in electronics everything is about controlling the flow of electrons. This chapter teaches you the tiny components that do that job.</p>
+        <div class="analogy">Think of a diode like a one-way valve for water. Current can only flow in one direction through it. A transistor is like a tap — a small signal at one end controls a large flow of current at the other end.</div>
+        <h4>Key sub-topics</h4>
+        <p><strong>Semiconductors:</strong> Materials like Silicon that are neither full conductors nor full insulators. When you add impurities (doping), they become N-type (extra electrons) or P-type (missing electrons = "holes").</p>
+        <p><strong>Diodes:</strong> Created by joining P-type and N-type silicon. Allows current in one direction only. Used in rectifiers (converting AC to DC), clipping, clamping circuits.</p>
+        <p><strong>Transistors:</strong> Three-terminal devices (Base, Collector, Emitter for BJT). Used as amplifiers or switches. Three configs: Common Emitter (most popular, high gain), Common Base, Common Collector.</p>
+        <p><strong>Op-Amps:</strong> Integrated circuits that amplify difference between two inputs. Used in filters, oscillators, comparators.</p>
+        <div class="key-terms">
+          <span class="kt">PN Junction</span><span class="kt">Forward Bias</span><span class="kt">Reverse Bias</span><span class="kt">Zener Diode</span><span class="kt">NPN/PNP</span><span class="kt">h-parameters</span><span class="kt">Feedback</span><span class="kt">FET</span><span class="kt">MOSFET</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="topic-card">
+      <div class="topic-head">
+        <div class="topic-num">02</div>
+        <div class="topic-name">Digital Electronics & VLSI</div>
+        <div class="difficulty d-easy">CS Familiar</div>
+        <div class="marks-badge">~15 MCQs</div>
+      </div>
+      <div class="topic-body">
+        <h4>What is this?</h4>
+        <p>This is the closest topic to your CS background. Digital electronics is literally about 0s and 1s in hardware — the physical layer of what you already know from programming and computer architecture.</p>
+        <div class="analogy">If you've done any bit manipulation in code, you already understand logic gates. AND gate = && operator. OR gate = || operator. NOT gate = ! operator. It's exactly the same logic, just in hardware.</div>
+        <h4>Key sub-topics</h4>
+        <p><strong>Number Systems:</strong> Binary, Octal, Hexadecimal, BCD conversions. You'll know most of this from CS.</p>
+        <p><strong>Logic Gates & Boolean Algebra:</strong> AND, OR, NOT, NAND, NOR, XOR. Simplifying expressions using De Morgan's theorem, Karnaugh Maps (K-Maps).</p>
+        <p><strong>Combinational Circuits:</strong> Adders, Multiplexers, Decoders, Encoders — circuits where output depends only on current inputs.</p>
+        <p><strong>Sequential Circuits:</strong> Flip-flops (SR, JK, D, T), Counters, Registers — circuits that have memory (output depends on past inputs too).</p>
+        <p><strong>VLSI & FPGA:</strong> How millions of transistors are packed on a chip. FPGA = a programmable chip. VHDL is the language used to program it (like C for hardware).</p>
+        <div class="key-terms">
+          <span class="kt">K-Map</span><span class="kt">PLA</span><span class="kt">Flip-flop</span><span class="kt">ADC / DAC</span><span class="kt">CMOS</span><span class="kt">FPGA</span><span class="kt">VHDL</span><span class="kt">Register</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="topic-card">
+      <div class="topic-head">
+        <div class="topic-num">03</div>
+        <div class="topic-name">Electronics Networks, Instruments & Measurements</div>
+        <div class="difficulty d-med">Moderate for CS</div>
+        <div class="marks-badge">~12 MCQs</div>
+      </div>
+      <div class="topic-body">
+        <h4>What is this?</h4>
+        <p>This covers how electronic circuits are analysed mathematically, and the physical instruments used to measure electrical signals. Think of it as the "testing and measurement" chapter.</p>
+        <div class="analogy">Network theorems are like shortcuts. Instead of solving a complex circuit from scratch, Thevenin's theorem lets you replace the whole circuit with just one voltage source + one resistor. Same answer, way simpler math.</div>
+        <h4>Key sub-topics</h4>
+        <p><strong>Network Theorems:</strong> Thevenin's, Norton's, Superposition — methods to simplify complex circuits. For MCQs, memorise what each theorem states and when to apply it, not full derivations.</p>
+        <p><strong>Resonance Circuits:</strong> When a circuit's inductive and capacitive reactance cancel out. Used in radio tuners to pick a specific frequency.</p>
+        <p><strong>Transmission Lines:</strong> Cables that carry high-frequency signals. Key concepts: impedance matching, standing waves, reflections.</p>
+        <p><strong>Instruments:</strong> Oscilloscope (visualises voltage waveforms), Signal Generators, Frequency Counters, Bridges (for measuring resistance/capacitance), Transducers (converts physical quantity to electrical signal).</p>
+        <div class="key-terms">
+          <span class="kt">Thevenin</span><span class="kt">Norton</span><span class="kt">Resonance</span><span class="kt">Q-factor</span><span class="kt">Oscilloscope</span><span class="kt">Transducer</span><span class="kt">Attenuator</span><span class="kt">Filter</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="topic-card">
+      <div class="topic-head">
+        <div class="topic-num">04</div>
+        <div class="topic-name">Communication Engineering</div>
+        <div class="difficulty d-hard">Core EC — Study Hard</div>
+        <div class="marks-badge">~20 MCQs</div>
+      </div>
+      <div class="topic-body">
+        <h4>What is this?</h4>
+        <p>This is THE most important topic for this exam. Communication engineering is about how information (voice, data, video) is sent from one place to another — through air (wireless) or cables. This is literally what the PSI Wireless job is about.</p>
+        <div class="analogy">Imagine your voice is a slow moving river (low frequency). Radio waves are a fast highway (high frequency). Modulation is the act of loading your slow river onto the fast highway so it can travel far. At the destination, demodulation removes your river from the highway.</div>
+        <h4>Key sub-topics</h4>
+        <p><strong>Modulation Types:</strong> AM (Amplitude Modulation) — strength of the wave changes. FM (Frequency Modulation) — frequency of the wave changes (less noise, better quality). PM (Phase Modulation). For MCQs, know bandwidth formulas and advantages of each.</p>
+        <p><strong>SSB (Single Sideband):</strong> A more efficient version of AM — sends only one sideband instead of two, using less bandwidth and power. Used in long-range communication.</p>
+        <p><strong>Digital Modulation:</strong> ASK (Amplitude Shift Keying), FSK (Frequency Shift Keying), PSK (Phase Shift Keying) — digital versions of AM/FM/PM. Used in WiFi, mobile networks.</p>
+        <p><strong>Multiplexing:</strong> FDM (Frequency Division Multiplexing) — each user gets a different frequency slice. TDM (Time Division Multiplexing) — each user gets a different time slot. Used to send many signals through one channel.</p>
+        <p><strong>Antennas:</strong> Convert electrical signals to radio waves and back. Key terms: gain, directivity, polarisation, half-wave dipole, Yagi antenna.</p>
+        <p><strong>Telephone Networks:</strong> How calls are routed through PSTN. Switching types — circuit switching (dedicated path) vs packet switching (data in packets).</p>
+        <div class="key-terms">
+          <span class="kt">AM / FM / PM</span><span class="kt">SSB</span><span class="kt">Bandwidth</span><span class="kt">SNR</span><span class="kt">FDM / TDM</span><span class="kt">PCM</span><span class="kt">Antenna Gain</span><span class="kt">Propagation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="topic-card">
+      <div class="topic-head">
+        <div class="topic-num">05</div>
+        <div class="topic-name">Communication Applications (Microwave, Fibre, Mobile, TV)</div>
+        <div class="difficulty d-hard">Heavy but Conceptual</div>
+        <div class="marks-badge">~20 MCQs</div>
+      </div>
+      <div class="topic-body">
+        <h4>What is this?</h4>
+        <p>This is the applied version of communication — how the theory from Topic 4 is used in real-world systems like satellite TV, fibre internet, mobile phones and broadcast television.</p>
+        <h4>Microwave Engineering</h4>
+        <p>Microwaves are very high-frequency radio waves (1GHz–300GHz). Used in RADAR, satellite links, point-to-point communication. Key devices: Klystron (power amplifier), Magnetron (in microwave ovens and RADAR).</p>
+        <div class="analogy">RADAR is like shouting into a cave and timing how long the echo takes to come back. The time × speed of light ÷ 2 = distance of the object.</div>
+        <h4>Fibre Optics</h4>
+        <p>Instead of electricity, fibre uses light to carry signals. Light travels through a glass fibre by bouncing off the walls (total internal reflection). Advantages: very high bandwidth, no electromagnetic interference, long distances. Three types of fibre: Single-mode (thin, long distance), Multimode step-index, Multimode graded-index.</p>
+        <h4>Mobile Communication</h4>
+        <p>GSM (2G): Voice calls digitised and sent in time slots. CDMA: All users share same frequency but with different codes. 4G LTE: Uses OFDM modulation, all-IP network, much higher speeds. Key concept: Cell towers divide a city into "cells" — as you move, your call hands off to the next tower.</p>
+        <h4>Television Engineering</h4>
+        <p>PAL system (used in India) — how colour TV signal is created. Understand: composite video signal, colour burst, horizontal/vertical sync pulses. TV modulation uses VSB (Vestigial Sideband) for video and FM for audio.</p>
+        <div class="key-terms">
+          <span class="kt">RADAR</span><span class="kt">Klystron</span><span class="kt">Total Internal Reflection</span><span class="kt">GSM</span><span class="kt">CDMA</span><span class="kt">4G LTE</span><span class="kt">PAL</span><span class="kt">VSB</span><span class="kt">Handoff</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="topic-card">
+      <div class="topic-head">
+        <div class="topic-num">06</div>
+        <div class="topic-name">Microprocessors & Microcontrollers</div>
+        <div class="difficulty d-med">CS Background Helps</div>
+        <div class="marks-badge">~12 MCQs</div>
+      </div>
+      <div class="topic-body">
+        <h4>What is this?</h4>
+        <p>The 8085 microprocessor is an old but foundational chip from the 1970s. It's to EC students what learning C in terminal is to CS students — old school, but teaches you how hardware really works. Your CS background will help you understand the concepts quickly.</p>
+        <div class="analogy">A microprocessor is like a tiny brain that reads instructions one by one and executes them. The 8085 has an 8-bit brain — it can only think in 8-bit chunks at a time. Modern CPUs think in 64 bits. Same idea, just more powerful.</div>
+        <h4>Key sub-topics</h4>
+        <p><strong>8085 Architecture:</strong> ALU (Arithmetic Logic Unit), Registers (A, B, C, D, E, H, L, SP, PC), address bus (16-bit), data bus (8-bit). Know what each register does.</p>
+        <p><strong>Instruction Set:</strong> Data transfer (MOV, MVI), Arithmetic (ADD, SUB), Logical (ANA, ORA), Branch (JMP, CALL, RET). Don't memorise all — just the commonly asked ones.</p>
+        <p><strong>8051 Microcontroller:</strong> Has built-in RAM, ROM, I/O ports — like a mini-computer on a chip. Used in embedded systems (washing machines, remotes). Key: it has 4 ports (P0, P1, P2, P3), 128 bytes RAM, 4KB ROM.</p>
+        <div class="key-terms">
+          <span class="kt">ALU</span><span class="kt">Accumulator</span><span class="kt">Program Counter</span><span class="kt">Stack Pointer</span><span class="kt">Opcode</span><span class="kt">Interrupt</span><span class="kt">8051 Timer</span><span class="kt">RISC</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 7 -->
+    <div class="topic-card">
+      <div class="topic-head">
+        <div class="topic-num">07</div>
+        <div class="topic-name">Computer Networks</div>
+        <div class="difficulty d-easy">Your Strongest Topic</div>
+        <div class="marks-badge">~10 MCQs</div>
+      </div>
+      <div class="topic-body">
+        <h4>What is this?</h4>
+        <p>As a CS engineer, this is your home turf. You already know most of this. Just make sure you can answer MCQs confidently — don't waste too much study time here.</p>
+        <div class="analogy">The OSI model is like a postal system. The Application layer is you writing the letter. The Transport layer is the envelope with address. The Network layer is the sorting office deciding the route. The Physical layer is the actual truck carrying it.</div>
+        <h4>Key sub-topics to quickly review</h4>
+        <p><strong>OSI Model (7 layers):</strong> Physical, Data Link, Network, Transport, Session, Presentation, Application. Know which protocols belong to which layer (HTTP = Application, TCP = Transport, IP = Network, Ethernet = Data Link).</p>
+        <p><strong>TCP/IP:</strong> Three-way handshake (SYN, SYN-ACK, ACK). Difference between TCP (reliable, slow) and UDP (fast, unreliable).</p>
+        <p><strong>IP Addressing:</strong> IPv4 classes (A, B, C), subnetting basics, private vs public IPs. IPv6 — 128-bit addresses.</p>
+        <p><strong>Network Devices:</strong> Hub (broadcasts to all), Switch (smart hub, MAC-based), Router (IP-based routing), Gateway, Firewall.</p>
+        <div class="key-terms">
+          <span class="kt">OSI Layers</span><span class="kt">TCP vs UDP</span><span class="kt">Subnetting</span><span class="kt">DHCP</span><span class="kt">DNS</span><span class="kt">ARP</span><span class="kt">VPN</span><span class="kt">HTTP/HTTPS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 8 -->
+    <div class="topic-card">
+      <div class="topic-head">
+        <div class="topic-num">08</div>
+        <div class="topic-name">Essentials of Network Security</div>
+        <div class="difficulty d-easy">Easy for CS Background</div>
+        <div class="marks-badge">~8 MCQs</div>
+      </div>
+      <div class="topic-body">
+        <h4>What is this?</h4>
+        <p>Security fundamentals — how data is protected during transmission. If you've ever used HTTPS or heard of SSL, you already know the basics. This topic is very scoring for CS engineers.</p>
+        <div class="analogy">Symmetric encryption is like both people having the same key to a lock — fast, but you have to secretly share the key first. Asymmetric encryption is like a padlock anyone can close (public key), but only one person has the key to open it (private key).</div>
+        <h4>Key sub-topics</h4>
+        <p><strong>Symmetric Encryption:</strong> Same key for encrypt and decrypt. Examples: AES, DES. Fast but key distribution is a problem.</p>
+        <p><strong>Asymmetric Encryption:</strong> Public key + Private key pair. Examples: RSA. Slower but solves key sharing problem. Used in HTTPS.</p>
+        <p><strong>Basic Arithmetics in Encryption:</strong> Modular arithmetic, prime numbers — the math behind RSA. For MCQs, understand the concept, not the proofs.</p>
+        <p><strong>OS Security:</strong> Authentication, access control, firewalls, intrusion detection.</p>
+        <div class="key-terms">
+          <span class="kt">AES</span><span class="kt">DES</span><span class="kt">RSA</span><span class="kt">Digital Signature</span><span class="kt">Hash Function</span><span class="kt">SSL/TLS</span><span class="kt">Firewall</span><span class="kt">IDS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 9 -->
+    <div class="topic-card">
+      <div class="topic-head">
+        <div class="topic-num">09</div>
+        <div class="topic-name">Web Technology</div>
+        <div class="difficulty d-easy">Quick Win</div>
+        <div class="marks-badge">~8 MCQs</div>
+      </div>
+      <div class="topic-body">
+        <h4>What is this?</h4>
+        <p>This is specifically about ASP.NET and web development concepts. A bit old-school (ASP.NET Classic / ASP.NET Web Forms), but the exam focuses on conceptual knowledge, not coding. Very easy scoring for CS engineers.</p>
+        <h4>Key sub-topics</h4>
+        <p><strong>ASP.NET vs Classic ASP:</strong> ASP.NET is Microsoft's web framework built on .NET. Classic ASP was the older version using VBScript. Key differences: ASP.NET is compiled (faster), supports code-behind, has better security.</p>
+        <p><strong>Client-Server Architecture:</strong> Browser (client) sends HTTP request → Web server processes it → sends back HTML response. Know the difference between client-side (runs in browser: JavaScript, HTML) and server-side (runs on server: C#, PHP).</p>
+        <p><strong>Web Application Components:</strong> IDE (Visual Studio), Solution/Project structure, Web.config file, Global.asax, Code-behind files (.aspx.cs).</p>
+        <p><strong>Visual Studio:</strong> Know the basic IDE components: Toolbox, Solution Explorer, Properties window, Code editor.</p>
+        <div class="key-terms">
+          <span class="kt">ASP.NET</span><span class="kt">HTTP / HTTPS</span><span class="kt">Session / Cookies</span><span class="kt">ViewState</span><span class="kt">Web.config</span><span class="kt">IIS Server</span><span class="kt">HTML / CSS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 10 -->
+    <div class="topic-card">
+      <div class="topic-head">
+        <div class="topic-num">10</div>
+        <div class="topic-name">Android Application Development</div>
+        <div class="difficulty d-easy">Conceptual — Don't Over Study</div>
+        <div class="marks-badge">~8 MCQs</div>
+      </div>
+      <div class="topic-body">
+        <h4>What is this?</h4>
+        <p>Basic Android development concepts. MCQs here are mostly conceptual — they test if you know what Android is and how apps are structured, not how to code them.</p>
+        <div class="analogy">An Android Activity is like a single screen in an app. When you open WhatsApp, the home screen is one Activity. When you open a chat, it's another Activity. They stack like a pile of cards.</div>
+        <h4>Key sub-topics</h4>
+        <p><strong>Android Architecture:</strong> Linux Kernel at bottom → Libraries + Android Runtime → Application Framework → Applications at top. Android apps run in the Dalvik/ART virtual machine.</p>
+        <p><strong>Activity Lifecycle:</strong> onCreate() → onStart() → onResume() → [Running] → onPause() → onStop() → onDestroy(). For MCQs, know which method is called when (e.g., when user presses Home button, onPause then onStop is called).</p>
+        <p><strong>UI Components:</strong> Activity (screen), Fragment (part of screen), Intent (message to start Activity), Layout files (XML-based UI), Views (Button, TextView, EditText), Adapters (for lists).</p>
+        <p><strong>SQLite Database:</strong> Android's built-in database for local storage. Key classes: SQLiteDatabase, ContentValues, Cursor.</p>
+        <div class="key-terms">
+          <span class="kt">Activity</span><span class="kt">Intent</span><span class="kt">Fragment</span><span class="kt">Layout XML</span><span class="kt">onCreate()</span><span class="kt">Manifest.xml</span><span class="kt">APK</span><span class="kt">ART Runtime</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 11 -->
+    <div class="topic-card">
+      <div class="topic-head">
+        <div class="topic-num">11</div>
+        <div class="topic-name">Current Trends (4G LTE, POLNET, IoT, Surveillance)</div>
+        <div class="difficulty d-med">Read & Remember</div>
+        <div class="marks-badge">~5 MCQs</div>
+      </div>
+      <div class="topic-body">
+        <h4>What is this?</h4>
+        <p>This is a "general awareness about modern tech" chapter. Since this is a Police (PSI) exam, some topics are directly related to police communication systems used in Gujarat. Light on theory, heavy on factual recall.</p>
+        <h4>Key sub-topics</h4>
+        <p><strong>4G LTE:</strong> Long Term Evolution. Uses OFDM modulation. All-IP network — even voice calls go over internet protocol (VoLTE). Peak speeds: 100 Mbps download. India's major 4G providers: Jio, Airtel, Vi.</p>
+        <p><strong>POLNET:</strong> This is Gujarat Police's own communication network. It's a dedicated wireless network for police. Understand the concept — why police need their own network (security, reliability, priority access).</p>
+        <p><strong>Disaster Management Communication:</strong> How communication systems are designed to survive disasters. Concepts: satellite backup, mesh networks, redundancy.</p>
+        <p><strong>Real Time Surveillance:</strong> CCTV networks, IP cameras, video analytics, central monitoring systems. Concepts relevant to police work.</p>
+        <p><strong>Recent Advancements:</strong> 5G concepts, IoT (Internet of Things), cloud communication, SDR (Software Defined Radio).</p>
+        <div class="key-terms">
+          <span class="kt">OFDM</span><span class="kt">VoLTE</span><span class="kt">POLNET</span><span class="kt">IP Camera</span><span class="kt">5G NR</span><span class="kt">IoT</span><span class="kt">SDR</span><span class="kt">Mesh Network</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TIPS -->
+<div id="tips" class="section">
+  <div class="sec-title">Strategy & Exam Tips</div>
+  <div class="sec-sub">These will save marks on exam day</div>
+
+  <div class="tips-list">
+    <div class="tip">
+      <div class="tip-icon">🎯</div>
+      <div><p><strong>Qualify both parts separately.</strong> 40% in each part is mandatory to appear in the merit list. Don't ignore Part A (aptitude) just because Part B (technical) has more marks. A 39% in Part A disqualifies you even if you score 100% in Part B.</p></div>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">⚠️</div>
+      <div><p><strong>Use the "E – Not Attempted" option wisely.</strong> If you're genuinely unsure, mark E. You lose nothing. But if you can eliminate 2 options, statistically it's worth attempting — your net expected score is positive. Never leave something blank without selecting E, as unattempted answers also get -0.25.</p></div>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">⏱️</div>
+      <div><p><strong>Time management in the hall.</strong> 200 questions in 3 hours = 54 seconds per question. Move fast on easy ones. Mark tough ones for review. Don't spend more than 90 seconds on any single question during the first pass.</p></div>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">🧠</div>
+      <div><p><strong>Start with your strongest topics.</strong> In Part B, do Computer Networks, Network Security, Android and Web first — these are your CS strength areas. Build confidence and score early, then tackle EC topics.</p></div>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">📱</div>
+      <div><p><strong>For EC MCQs, focus on concepts not formulas.</strong> MCQ exams rarely ask you to calculate bandwidth from scratch. They ask things like "which modulation has the widest bandwidth?" or "what is the advantage of FM over AM?". Understand the why, not just the numbers.</p></div>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">🔄</div>
+      <div><p><strong>Spaced repetition is your best friend.</strong> Don't study a topic once and move on. Every Sunday, spend 30 minutes re-reading notes from the previous week. This alone will double your retention by exam day.</p></div>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">🌙</div>
+      <div><p><strong>The night before the exam.</strong> Don't study any new topics. Just lightly re-read your own notes. Sleep by 10:30pm. Your brain consolidates memory during sleep — a rested brain outperforms a cramming brain every time.</p></div>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">💡</div>
+      <div><p><strong>For Constitution questions,</strong> the most asked topics are: Fundamental Rights (Part III), Directive Principles (Part IV), Emergency provisions (Articles 352, 356, 360), Amendment procedure (Article 368), and the President vs Governor powers. Cover these first.</p></div>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">🔋</div>
+      <div><p><strong>Don't sacrifice health for study.</strong> Your swimming, walking, and gym routine is actually an asset. Physical exercise improves brain plasticity and memory consolidation. Keep your routine. Just add 90 minutes of focused study at night.</p></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+</body>
+</html>
+
